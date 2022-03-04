@@ -5,22 +5,25 @@
 #include <string.h>
 #include <time.h>
 
-
-// void menu();
-// void con();
-// void close();
-// double * load_turn_data();
-// int count();
-// void readtrain(int t);
-// void printandwriteTrain(double *head);
-// void writeReport(int id,char* name,char* type);
-// void insertrain();
-// void deletetrain();
-// void printtest
+void menu();
+void close();
+void con();
+int count(char *filename);
+void printturnlist(int tid);
 void printandwriteTurn(double *head);
-
+double * load_turn_data();
+double * load_train_data();
+int searchTrain(int t , int tid);
+int searchTurn(int t , int tid);
+void writeReport(int id,char* name,char* type);
+void readturn(int t);
+void inserturnrear();
+void inserturnfront();
+void inserturnnext();
+void updateturn();
+void deleteturn();
 const char turndataRef[20] ="turndata.txt";
-const char traindataRef[20] ="traindata.txt";
+// const char traindataRef[20] ="traindata.txt";
 
 
 // struct nodeturn
@@ -52,143 +55,143 @@ struct nodetrain
 
 
 //menu
-void menu(){
-//   int choice;
-//   system("cls");
-//   system("color 03");
-//   menuerror:
-//       printf("\n--------MENU--------"); //show menu
-//       printf("\n01.Search Train ");
-//       printf("\n02.Train Details ");
-//       printf("\n03.ADD a Train");
-//       printf("\n08.Delete Product");
-//       printf("\n09.Activity Report ");
-//       printf("\n10.Exit ");
-//       printf("\n\n Enter your choice :"); // get users choices
-//       scanf("%d",&choice);
-//       system("cls");
+// void menu(){
+// //   int choice;
+// //   system("cls");
+// //   system("color 03");
+// //   menuerror:
+// //       printf("\n--------MENU--------"); //show menu
+// //       printf("\n01.Search Train ");
+// //       printf("\n02.Train Details ");
+// //       printf("\n03.ADD a Train");
+// //       printf("\n08.Delete Product");
+// //       printf("\n09.Activity Report ");
+// //       printf("\n10.Exit ");
+// //       printf("\n\n Enter your choice :"); // get users choices
+// //       scanf("%d",&choice);
+// //       system("cls");
 
-//       switch(choice)
-//       {
-//       case 1:
-//         searchTrain(0,0);
-//         break;
-//       case 2:
-//         readtrain(0);// 0 value as an argument
-//         break;
-//       case 3:
-//         insertrain();
-//         break;
+// //       switch(choice)
+// //       {
+// //       case 1:
+// //         searchTrain(0,0);
+// //         break;
+// //       case 2:
+// //         readtrain(0);// 0 value as an argument
+// //         break;
+// //       case 3:
+// //         insertrain();
+// //         break;
       
-//        case 8:
-//         deletetrain();
+// //        case 8:
+// //         deletetrain();
         
-//         break;
-//        case 9:
-//         // report();
-//         break;
-//       case 10:
-//          close();
-//         break;
-//       default:
-//         printf("Invalid Choice");
-//         goto menuerror;
-//       }
-}
+// //         break;
+// //        case 9:
+// //         // report();
+// //         break;
+// //       case 10:
+// //          close();
+// //         break;
+// //       default:
+// //         printf("Invalid Choice");
+// //         goto menuerror;
+// //       }
+// }
 
 
 
-void close()
-{
-    printf("\t\t\t\t\tExiting from the system..... ");
-    // animeE();
-   system("cls");
-   system("color 0a");
-    printf("\n\n\n\n \t\t\t\t\t\t..............EXIT................");
-     system("exit");
+// void close()
+// {
+//     printf("\t\t\t\t\tExiting from the system..... ");
+//     // animeE();
+//    system("cls");
+//    system("color 0a");
+//     printf("\n\n\n\n \t\t\t\t\t\t..............EXIT................");
+//      system("exit");
     
-}
+// }
 
 
-//con
-void con(){
-	char c;
-	printf("\n Enter (Y or y)to go to the main menu otherwise enter(N or n) to exit.");
-	scanf("%c",&c);
-	while(1){
-		if((c=='Y')||(c=='y')||(c=='N')||(c=='n')){// check validation
-			break;
-		}else{
-			printf("Enter correct letter:");
-			scanf(" %c",&c);	
-		}
-	}
+// //con
+// void con(){
+// 	char c;
+// 	printf("\n Enter (Y or y)to go to the main menu otherwise enter(N or n) to exit.");
+// 	scanf("%c",&c);
+// 	while(1){
+// 		if((c=='Y')||(c=='y')||(c=='N')||(c=='n')){// check validation
+// 			break;
+// 		}else{
+// 			printf("Enter correct letter:");
+// 			scanf(" %c",&c);	
+// 		}
+// 	}
 
-	if((c=='Y')||(c=='y')){
-		menu();// goto menu
-	}else{
-		close(); //
-	}
-}
-
-
-
+// 	if((c=='Y')||(c=='y')){
+// 		menu();// goto menu
+// 	}else{
+// 		close(); //
+// 	}
+// }
 
 
 
-int count(char *filename){
 
-    int s=0;
-    FILE* file = fopen(filename, "r");// openfile
-    char line[150];
-    if ( file == NULL ){ 
-        // printf( " file failed to open." ) ; 
-        s=0;
-    } 
-    else{
-        while (fgets(line, sizeof(line), file)) {
-            //printf("%s", line);
-            s++;
 
-        }
-    }
-    fclose(file);
+
+// int count(char *filename){
+
+//     int s=0;
+//     FILE* file = fopen(filename, "r");// openfile
+//     char line[150];
+//     if ( file == NULL ){ 
+//         // printf( " file failed to open." ) ; 
+//         s=0;
+//     } 
+//     else{
+//         while (fgets(line, sizeof(line), file)) {
+//             //printf("%s", line);
+//             s++;
+
+//         }
+//     }
+//     fclose(file);
 	
-    return s;
-}
+//     return s;
+// }
 
-double * load_train_data(){
-  int s=count(traindataRef);// get count
-  struct nodetrain *head=NULL;
-  head=(struct nodetrain*)malloc(sizeof(struct nodetrain));
-  head->next=NULL;
+// double * load_train_data(){
+//   int s=count(traindataRef);// get count
+//   struct nodetrain *head=NULL;
+//   head=(struct nodetrain*)malloc(sizeof(struct nodetrain));
+//   head->next=NULL;
 
-  struct nodetrain *go=head;
-    FILE* file = fopen(traindataRef, "r");//open file
-    if ( file == NULL ){ 
-        printf( " file failed to open." ); 
-    } 
-    else{
-       for(int i=1;i<=s;i++){// get data from file to link list
+//   struct nodetrain *go=head;
+//     FILE* file = fopen(traindataRef, "r");//open file
+//     if ( file == NULL ){ 
+//         printf( " file failed to open." ); 
+//     } 
+//     else{
+//        for(int i=1;i<=s;i++){// get data from file to link list
            
-            fscanf(file,"%d %s\n",&go->id,go->name);
-           // printf("%d  %d \n",go->pid,go->qty);
-           if (i!=s)
-           {
-                go->next=(struct nodetrain*)malloc(sizeof(struct nodetrain));
-            go=go->next;
-            go->next=NULL;
-           }
+//             fscanf(file,"%d %s\n",&go->id,go->name);
+//            // printf("%d  %d \n",go->pid,go->qty);
+//            if (i!=s)
+//            {
+//                 go->next=(struct nodetrain*)malloc(sizeof(struct nodetrain));
+//             go=go->next;
+//             go->next=NULL;
+//            }
            
     
 
-        }
-    }
-   //printf("****\n");
-    fclose(file);
-    return head;
+//         }
+//     }
+//    //printf("****\n");
+//     fclose(file);
+//     return head;
 
- }
+//  }
 // return head 
 
 double * load_turn_data(){
@@ -290,74 +293,7 @@ int searchTurn(int t , int tid){
  
 }
 
-int searchTrain(int t , int tid){
-   
-  system("color 0e");
-  int f=0;
-  if (count(traindataRef)==0)
-  {
-    if (t==0)
-    {
-      printf("\t\t\t\t\tEmpty data list\n");
-    }
-    
-  }else
-  {
-    double *head=load_train_data();
-    struct nodetrain *go=head;
-    int n; 
-  if (t==0)
-  {
-  system("cls");
-  printf("Enter Train ID , that you want to search ??...  ");
-  scanf("%d",&n);
-  }else{
-    n=tid;
-  }
 
-   
-    while (1)
-    { 
-     if (go->id==n)
-     {
-      if (t==0)
-      {
-           printf("----------------Details------------------------\n\n");
-        printf("Train ID -%d \nName - %s\n  ",go->id,go->name);
-      }
-      
-        f=1;
-        break;
-     }
-        
-     if (go->next==NULL)
-    {
-        break;
-    }
-  go=go->next;
-    
-    //printf("\n");
-    }
-    if (f==0&&t==0)
-    {
-      system("color 0c");
-       system("cls");
-        printf("\t\t\t\t\t\tInvalid  P ID\n");
-    }
-
- 
-  }
-   if(t==0){
-     con();
-  }
-  
-  
-
-
-
-  return f;
- 
-}
 
 
 
@@ -443,16 +379,6 @@ void printandwriteTurn(double *head){
 
     fclose(ptr_file1);
 
-}
-
-void writeReport(int id,char* name,char* type){
-
-  time_t t;
-  time(&t);
-  FILE *file;
-  file =fopen("report.txt","a"); 
-  fprintf(file, "   %6d             %15s       %16s      %s \n",id,name,type,ctime(&t));
-  fclose(file);
 }
 
 
@@ -822,25 +748,75 @@ void deleteturn(){
   con();
 }
 
+void printturnlist(int tid){
+
+    if (count(turndataRef)==0)
+    {   
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n                             Turn RECORDS (Train ID - %d)                          ",tid);
+        printf("\n------------------------------------------------------------------------------------");
+        printf("\n     ID      |       NAME        |       Started Time      |        Ended Time     ");
+        printf("\n-----------------------------------------------------------------------------------\n");
+        printf("\n----------------------------  No turn Availabel ----------------------------------");
+    }else{
+        double *head=load_turn_data();
+        struct nodeturn *go=head;
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n                             Turn RECORDS (Train ID - %d)                          ",tid);
+        printf("\n------------------------------------------------------------------------------------");
+        printf("\n     ID      |       NAME        |       Started Time      |        Ended Time     ");
+        printf("\n-----------------------------------------------------------------------------------\n");
+        int rowcount=0;
+        while (1)
+        {
+           if (go->trainid=tid)
+           {
+               printf(" %6d        %15s        %16s        %16s         \n",go->id,go->name,go->starttime,go->endtime);
+               rowcount++;
+           }
+           if (go->next==NULL)
+           {
+                break;
+           }
+
+           go=go->next;
+
+        }
+        if (rowcount==0)
+        {
+           printf("\n----------------------------  No turn Availabel ----------------------------------");
+        }
+        
+        
+
+    }
+    
 
 
-
-int main()
-{
-	//  printf("%d",count(turndataRef));
-	// readtrain(0);
-  // insertrain();
-//  printf("%d", searchTrain(1,5));
-// deletetrain();
-// insertrainrear()
-// inserturnfront();
-// inserturnnext();
-// readturn(0);
-// printtest();
-// deleteturn();
-updateturn();
-	return 0;
 }
+
+
+
+
+
+
+
+// int main()
+// {
+// 	//  printf("%d",count(turndataRef));
+// 	// readtrain(0);
+//   // insertrain();
+//  searchTrain(0,4);
+// // deletetrain();
+// // insertrainrear()
+// // inserturnfront();
+// // inserturnnext();
+// // readturn(0);
+// // printtest();
+// // deleteturn();
+// // updateturn();
+// 	return 0;
+// }
 
 
 
