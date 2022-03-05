@@ -71,9 +71,9 @@ void login(){
                 {
                      initalanimation();
                 }
-                
+                menu();
                
-       break;
+    //    break;
         
 		}
      system("cls");
@@ -163,6 +163,6 @@ int main()
 {
     
     login();
-    menu();
+    
     return 0;
 }

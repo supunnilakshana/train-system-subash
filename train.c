@@ -380,20 +380,6 @@ void deletetrain(){
 
 
 
-// int main()
-// {
-// 	//  printf("%d",count(traindataRef));
-// 	// readtrain(0);
-//   // insertrain();
-//   // searchTrain(0,1);
-// // deletetrain();
-// menu();
-// // printtest();
-// 	return 0;
-// }
-
-
-
 
 
 

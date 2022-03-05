@@ -680,13 +680,10 @@ void printturnlist(int tid){
            printf("\n----------------------------  No turn Availabel ----------------------------------");
            resetcolor();
         }
-        
-        
-resetcolor();
+            
+    resetcolor();
     }
     
-
-
 }
 
 
@@ -694,23 +691,6 @@ resetcolor();
 
 
 
-
-// int main()
-// {
-// 	//  printf("%d",count(turndataRef));
-// 	// readtrain(0);
-//   // insertrain();
-//  searchTrain(0,4);
-// // deletetrain();
-// // insertrainrear()
-// // inserturnfront();
-// // inserturnnext();
-// // readturn(0);
-// // printtest();
-// // deleteturn();
-// // updateturn();
-// 	return 0;
-// }
 
 
 
