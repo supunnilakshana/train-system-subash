@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+#include<windows.h>
+// #include "appstyle.h"
 
 
 void menu();
@@ -16,7 +18,10 @@ void printandwriteTrain(double *head);
 void writeReport(int id,char* name,char* type);
 void insertrain();
 void deletetrain();
-void printtest();
+int searchTrain(int t , int tid);
+void report();
+
+
 
 const char traindataRef[20] ="traindata.txt";
 
@@ -38,113 +43,6 @@ struct nodeturn
 	int trainid;
 	struct nodeturn *next;
 };
-
-
-//menu
-void menu(){
-  int choice;
-  system("cls");
-  system("color 03");
-  menuerror:
-      printf("\n--------MENU--------"); //show menu
-      printf("\n01.Search Train ");
-      printf("\n02.Train Details ");
-      printf("\n03.ADD a Train");
-      printf("\n08.Delete Product");
-      printf("\n09.Activity Report ");
-      printf("\n10.Exit ");
-      printf("\n\n Enter your choice :"); // get users choices
-      scanf("%d",&choice);
-      system("cls");
-
-      switch(choice)
-      {
-      case 1:
-        searchTrain(0,0);
-        break;
-      case 2:
-        readtrain(0);// 0 value as an argument
-        break;
-      case 3:
-        insertrain();
-        break;
-      
-       case 8:
-        deletetrain();
-        
-        break;
-       case 9:
-        // report();
-        break;
-      case 10:
-         close();
-        break;
-      default:
-        printf("Invalid Choice");
-        goto menuerror;
-      }
-}
-
-
-
-void close()
-{
-    printf("\t\t\t\t\tExiting from the system..... ");
-    // animeE();
-   system("cls");
-   system("color 0a");
-    printf("\n\n\n\n \t\t\t\t\t\t..............EXIT................");
-     system("exit");
-    
-}
-
-
-//con
-void con(){
-	char c;
-	printf("\n Enter (Y or y)to go to the main menu otherwise enter(N or n) to exit.");
-	scanf("%c",&c);
-	while(1){
-		if((c=='Y')||(c=='y')||(c=='N')||(c=='n')){// check validation
-			break;
-		}else{
-			printf("Enter correct letter:");
-			scanf(" %c",&c);	
-		}
-	}
-
-	if((c=='Y')||(c=='y')){
-		menu();// goto menu
-	}else{
-		close(); //
-	}
-}
-
-
-
-
-
-
-int count(const char *filename){
-
-    int s=0;
-    FILE* file = fopen(filename, "r");// openfile
-    char line[150];
-    if ( file == NULL ){ 
-        printf( " file failed to open." ) ; 
-        s=0;
-    } 
-    else{
-        while (fgets(line, sizeof(line), file)) {
-            //printf("%s", line);
-            s++;
-
-        }
-    }
-    fclose(file);
-	
-    return s;
-}
 
 // return head 
 
@@ -181,6 +79,7 @@ double * load_train_data(){
 
  }
 
+
 int searchTrain(int t , int tid){
    
   system("color 0e");
@@ -189,6 +88,7 @@ int searchTrain(int t , int tid){
   {
     if (t==0)
     {
+      red();
       printf("\t\t\t\t\tEmpty data list\n");
     }
     
@@ -212,9 +112,10 @@ int searchTrain(int t , int tid){
      if (go->id==n)
      {
       if (t==0)
-      {
+      {    green();
            printf("----------------Details------------------------\n\n");
         printf("Train ID -%d \nName - %s\n  ",go->id,go->name);
+         printturnlist(go->id);
       }
       
         f=1;
@@ -256,7 +157,7 @@ int searchTrain(int t , int tid){
   
     system("color 0e");// chanage color
     system("cls");//clear console
-    
+    blue();
     printf("\n------------------------------------");
     printf("\n     Train RECORDS  (CURRENT)      ");
     printf("\n-----------------------------------");
@@ -265,13 +166,14 @@ int searchTrain(int t , int tid){
 
   if (s==0)
   {
+    red();
     printf("\n---------empty data list----------\n");
   }else
   {
     double *head=load_train_data();
   struct nodetrain *go=head;
     
-
+  yellow();
   while (1)
     { 
         
@@ -288,7 +190,7 @@ int searchTrain(int t , int tid){
   }
   
   
-
+  resetcolor();
     //printf("****\n"); 
   if (t==0)
   {
@@ -298,15 +200,14 @@ int searchTrain(int t , int tid){
     printf("\n") ;
     //pass
   }
-  
- 
+   
 }
 
 void printandwriteTrain(double *head){
    struct nodetrain *go=head;
      FILE *ptr_file1;
     ptr_file1 =fopen(traindataRef,"w"); 
-
+   purple();
     printf("\n------------------------------------");
     printf("\n     Train RECORDS  (New)      ");
     printf("\n-----------------------------------");
@@ -316,6 +217,7 @@ void printandwriteTrain(double *head){
     
     while (1)
     { 
+      yellow();
 	   //printf("\n No    |    ID      |       NAME        |      PRICE    |   QUANTITY  |   Type   ");    
 	  printf(" %6d        %15s      \n",go->id,go->name);
     fprintf(ptr_file1, "%6d  %15s  \n",go->id,go->name);
@@ -329,23 +231,10 @@ void printandwriteTrain(double *head){
     printf("\n");
     }
 
-
+resetcolor();
     fclose(ptr_file1);
 
 }
-
-void writeReport(int id,char* name,char* type){
-
-  time_t t;
-  time(&t);
-  FILE *file;
-  file =fopen("report.txt","a"); 
-  fprintf(file, "   %6d             %15s       %16s      %s \n",id,name,type,ctime(&t));
-  fclose(file);
-}
-
-
-
 
 
 
@@ -363,7 +252,9 @@ void insertrain(){
          int f=searchTrain(1,newNode->id);
         if (f==1)
         {
+          red();
           printf("\n\nEntered product ID has given to another product ,Try again!!!\n\n");
+          resetcolor();
          goto inputs;
         }
         printf("Enter Train name ");
@@ -474,8 +365,9 @@ void deletetrain(){
                           printandwriteTrain(head);
               }
         }else{
-
+          red();
           printf("\t\tInvalid Train Id!!!!\n");
+          resetcolor();
           goto inputs;
 
         }
@@ -488,17 +380,17 @@ void deletetrain(){
 
 
 
-int main()
-{
-	//  printf("%d",count(traindataRef));
-	// readtrain(0);
-  // insertrain();
-  // searchTrain(0,1);
-// deletetrain();
-menu();
-// printtest();
-	return 0;
-}
+// int main()
+// {
+// 	//  printf("%d",count(traindataRef));
+// 	// readtrain(0);
+//   // insertrain();
+//   // searchTrain(0,1);
+// // deletetrain();
+// menu();
+// // printtest();
+// 	return 0;
+// }
 
 
 

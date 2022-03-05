@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+// #include "appstyle.h"
+#include<windows.h>
 
 void menu();
 void close();
@@ -259,9 +261,12 @@ int searchTurn(int t , int tid){
      {
       if (t==0)
       {
-           printf("----------------Details------------------------\n\n");
-        printf("Turn ID -%d \nName - %s\nStrated Time - %s \nEnded Time - %s \nTrain ID - %d \n",go->id,go->name,go->starttime,go->endtime,go->trainid);
+          blue();
+           printf("----------------Details------------------------\n\n");   
+     printf("Turn ID -%d \nName - %s\nStrated Time - %s \nEnded Time - %s \nTrain ID - %d \n",go->id,go->name,go->starttime,go->endtime,go->trainid);
+     resetcolor();
       }
+
       
         f=1;
         break;
@@ -279,10 +284,12 @@ int searchTurn(int t , int tid){
     {
       system("color 0c");
        system("cls");
+       red();
         printf("\t\t\t\t\t\tInvalid   ID\n");
+        resetcolor();
     }
 
- 
+ resetcolor();
   }
    if(t==0){
      con();
@@ -303,7 +310,7 @@ int searchTurn(int t , int tid){
   
     system("color 0e");// chanage color
     system("cls");//clear console
-    
+    blue();
     printf("\n-------------------------------------------------------------------------------------------------");
     printf("\n                                   Turn RECORDS  (CURRENT)                                   ");
     printf("\n---------------------------------------------------------------------------------------------");
@@ -312,13 +319,15 @@ int searchTurn(int t , int tid){
 
   if (s==0)
   {
+      red();
     printf("\n-----------------------------------------empty data list-----------------------------------------\n");
+    resetcolor();
   }else
   {
     double *head=load_turn_data();
   struct nodeturn *go=head;
      
-
+    yellow();
   while (1)
     { 
      
@@ -335,7 +344,7 @@ int searchTurn(int t , int tid){
   }
   
   
-
+    resetcolor();
     //printf("****\n"); 
   if (t==0)
   {
@@ -353,14 +362,14 @@ void printandwriteTurn(double *head){
    struct nodeturn *go=head;
      FILE *ptr_file1;
     ptr_file1 =fopen(turndataRef,"w"); 
-
+    cyan();
     printf("\n-------------------------------------------------------------------------------------------------");
     printf("\n                                   Turn RECORDS  (New)                                           ");
     printf("\n-------------------------------------------------------------------------------------------------");
     printf("\n     ID      |       NAME        |       Started Time      |        Ended Time     |  Train ID  ");
     printf("\n-------------------------------------------------------------------------------------------------\n");
     int i=0;
-    
+    yellow();
     while (1)
     { 
 	   //printf("\n No    |    ID      |       NAME        |      PRICE    |   QUANTITY  |   Type   ");    
@@ -376,7 +385,7 @@ void printandwriteTurn(double *head){
     printf("\n");
     }
 
-
+    resetcolor();
     fclose(ptr_file1);
 
 }
@@ -415,7 +424,9 @@ void inserturnrear(){
                
             if (searchTrain(1,newNode->trainid)==0)
             {
+                red();
                 printf("\tInvalid Train Id !!!\n");
+                resetcolor();
                 goto inputtrainid;
             }
              
@@ -470,8 +481,9 @@ void inserturnfront(){
             scanf("%d",&newNode->trainid);
                
             if (searchTrain(1,newNode->trainid)==0)
-            {
+            {   red();
                 printf("\tInvalid Train Id !!!\n");
+                resetcolor();
                 goto inputtrainid;
             }
              
@@ -494,7 +506,7 @@ void inserturnfront(){
     // struct nodeturn *go =head ;
       printandwriteTurn(newNode);
      }
-     
+     resetcolor();
      con();
 
  }
@@ -523,7 +535,9 @@ void inserturnnext(){
          int f=searchTurn(1,newNode->id);
         if (f==1)
         {
+            red();
           printf("\n\nEntered trun ID has given to another turn ,Try again!!!\n\n");
+          resetcolor();
          goto inputs;
         }
         printf("Enter Turn name ");
@@ -538,7 +552,9 @@ void inserturnnext(){
                
             if (searchTrain(1,newNode->trainid)==0)
             {
+                red();
                 printf("\tInvalid Train Id !!!\n");
+                resetcolor();
                 goto inputtrainid;
             }
              
@@ -589,8 +605,10 @@ void updateturn(){
         scanf("%d",&pevturnid);
         if (searchTurn(1,pevturnid)==0)
         {
+            red();
         printf("\nInvalid Turn Id!!!\n");
           goto  previnputs;
+          resetcolor();
         }
         
 
@@ -601,7 +619,9 @@ void updateturn(){
          int f=searchTurn(1,newNode->id);
         if (f==1)
         {
+            red();
           printf("\n\nEntered trun ID has given to another turn ,Try again!!!\n\n");
+             resetcolor();
          goto inputs;
         }
         printf("Enter Turn name ");
@@ -616,7 +636,9 @@ void updateturn(){
                
             if (searchTrain(1,newNode->trainid)==0)
             {
+                red();
                 printf("\tInvalid Train Id !!!\n");
+                resetcolor();
                 goto inputtrainid;
             }
              
@@ -651,7 +673,7 @@ void updateturn(){
        printandwriteTurn(head);
      }
 
-     
+     resetcolor();
          char type[16]="ADD-Turn-Next";
     writeReport(newNode->id,newNode->name,type);
      con();
@@ -737,11 +759,13 @@ void deleteturn(){
                           printandwriteTurn(head);
               }
         }else{
-
+            red();
           printf("\t\tInvalid Train Id!!!!\n");
+             resetcolor();
           goto inputs;
 
         }
+        resetcolor();
     }
     
 
@@ -752,24 +776,30 @@ void printturnlist(int tid){
 
     if (count(turndataRef)==0)
     {   
+        purple();
         printf("\n-------------------------------------------------------------------------------------");
         printf("\n                             Turn RECORDS (Train ID - %d)                          ",tid);
         printf("\n------------------------------------------------------------------------------------");
         printf("\n     ID      |       NAME        |       Started Time      |        Ended Time     ");
         printf("\n-----------------------------------------------------------------------------------\n");
+        red();
         printf("\n----------------------------  No turn Availabel ----------------------------------");
+           resetcolor();
     }else{
         double *head=load_turn_data();
         struct nodeturn *go=head;
+         purple();
         printf("\n-------------------------------------------------------------------------------------");
         printf("\n                             Turn RECORDS (Train ID - %d)                          ",tid);
         printf("\n------------------------------------------------------------------------------------");
         printf("\n     ID      |       NAME        |       Started Time      |        Ended Time     ");
         printf("\n-----------------------------------------------------------------------------------\n");
+
+        yellow();
         int rowcount=0;
         while (1)
         {
-           if (go->trainid=tid)
+           if (go->trainid==tid)
            {
                printf(" %6d        %15s        %16s        %16s         \n",go->id,go->name,go->starttime,go->endtime);
                rowcount++;
@@ -783,12 +813,14 @@ void printturnlist(int tid){
 
         }
         if (rowcount==0)
-        {
+        { 
+            red();
            printf("\n----------------------------  No turn Availabel ----------------------------------");
+           resetcolor();
         }
         
         
-
+resetcolor();
     }
     
 
